@@ -1,0 +1,44 @@
+menu "阅读器配置"
+
+    # esp_hosted 3.x 的组件清单里用到了这三个 Kconfig 变量（形如
+    # `$CONFIG{...} == 1`），但它们只在 esp_hosted 自身的 Kconfig 中定义。
+    # 在 ESP-IDF 5.5.4 下组件管理器解析清单时会因为找不到变量而反复重试。
+    # 这里把它们补成 int 型（保持 0 = 关闭），即可正常解析清单。
+    config ESP_HOSTED_HOST_USB_CDC_ACM_MANIFEST
+        int "esp_hosted: USB CDC-ACM manifest (保持 0)"
+        default 0
+
+    config ESP_HOSTED_HOST_USB_CHERRYUSB_MANIFEST
+        int "esp_hosted: CherryUSB manifest (保持 0)"
+        default 0
+
+    config ESP_HOSTED_HOST_USB_RNDIS_MANIFEST
+        int "esp_hosted: USB RNDIS manifest (保持 0)"
+        default 0
+
+endmenu
+
+menu "视频播放配置"
+
+    # 官方 10_mp4_player 的 app_extractor.c 会读取这些符号
+    config HDMI_VIDEO_SYNC_ENABLED
+        bool "音视频同步"
+        default y
+
+    config AUDIO_DEC_FLAC_ENABLE
+        bool "启用 FLAC 解码"
+        default n
+
+    config AUDIO_DEC_OPUS_ENABLE
+        bool "启用 Opus 解码"
+        default n
+
+    config AUDIO_DEC_VORBIS_ENABLE
+        bool "启用 Vorbis 解码"
+        default n
+
+    config AUDIO_DEC_ADPCM_ENABLE
+        bool "启用 ADPCM 解码"
+        default n
+
+endmenu

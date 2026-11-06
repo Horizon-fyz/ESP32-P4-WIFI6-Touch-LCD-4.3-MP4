@@ -1,0 +1,54 @@
+file(GLOB FONT_BINS "${CMAKE_CURRENT_SOURCE_DIR}/../fonts/cjk_*.bin")
+
+idf_component_register(
+    SRCS
+        "main.c"
+        "app/app.c"
+        "app/clock.c"
+        "app/debug_cmd.c"
+        "app/fonts.c"
+        "app/screenshot.c"
+        "book/book.c"
+        "book/book_txt.c"
+        "book/book_epub.c"
+        "book/zip.c"
+        "book/text_util.c"
+        "book/gbk_table.c"
+        "layout/layout.c"
+        "storage/storage.c"
+        "audio/player.c"
+        "ui/theme.c"
+        "ui/widgets.c"
+        "ui/home.c"
+        "ui/library.c"
+        "ui/reader.c"
+        "ui/toc.c"
+        "ui/settings_screen.c"
+        "ui/clock_screen.c"
+        "ui/wifi_screen.c"
+        "ui/gallery.c"
+        "ui/music_screen.c"
+        "ui/ble_screen.c"
+        "ui/video.c"
+        "video/app_extractor.c"
+        "video/app_stream_adapter.c"
+        "net/wifi.c"
+        "net/ble.c"
+        "net/web_server.c"
+    INCLUDE_DIRS
+        "."
+        "app"
+        "book"
+        "layout"
+        "storage"
+        "audio"
+        "ui"
+        "video"
+        "net"
+    # 字体直接嵌入固件（Flash 映射，零拷贝），避免启动时从文件系统慢速读取。
+    # 每个字号按字形位图大小拆成多个包（见 tools/gen_fonts.py），这里全部嵌入。
+    EMBED_FILES
+        ${FONT_BINS}
+        "assets/test.jpg"
+        "assets/test.avi"
+)

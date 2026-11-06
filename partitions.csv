@@ -1,0 +1,7 @@
+# Name,   Type, SubType, Offset,   Size,     Flags
+# 中文字体（GB2312 全集 × 4 档字号，非压缩 4bpp）约 11MB，
+# 而 LVGL 单个字体位图索引只有 20 位，字体必须拆包，总量随之上升。
+# flash 为 32MB，factory 扩到 16MB。
+nvs,       data, nvs,     0x9000,   0x6000,
+phy_init,  data, phy,     0xf000,   0x1000,
+factory,   app,  factory, 0x10000,  16M,
